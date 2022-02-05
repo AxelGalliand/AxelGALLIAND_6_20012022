@@ -42,6 +42,7 @@ h1 {
 .photographer_section article h2 {
     color: #D3573C;
     font-size: 36px;
+    height: 25px ;
 }
 
 .photographer_section article img {
@@ -52,4 +53,34 @@ h1 {
     background: #C4C4C4;
     box-shadow: 0px 4px 12px
     rgba(0, 0, 0, 25);
+}
+
+
+
+.card__local {
+
+    color: #901C1C;
+    height: 5px;
+    margin-top: 0px;
+    left: 67px;
+    font-weight: 500;
+    font-size: larger;
+    text-align: center;
+
+}
+
+.card__tagline {
+
+    height: 5px;
+    margin-top: 5px;
+
+}
+
+.card__price {
+
+    color: #757575 ;
+    height: 5px;
+    margin-top: 5px;
+    font-size: small;
+
 }
