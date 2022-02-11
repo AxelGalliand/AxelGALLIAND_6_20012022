@@ -3,28 +3,74 @@
 }
 
 .photograph-header {
+  display: flex;
+  justify-content: space-between;
   background-color: #FAFAFA;
-  height: 300px;
+  height: 250px;
   margin: 0 100px;
+  align-items: center;
+}
+
+.photographer__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: left ;
+  margin-left: 4em;
+}
+
+.photographer__h1 {
+  color: #D3573C;
+  font-size: 48px;
+  margin-bottom: 0.25em;
+}
+
+.photographer__local {
+  color: #901C1C;
+  height: 5px;
+  margin-top: 0px;
+  font-weight: 500;
+  font-size: larger;
+}
+
+.photographer__tagline {
+  color: #525252;
 }
 
 .contact_button {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   color: white;
   padding: 11px;
-  width: 170px;
-  height: 70px;
+  width: 140px;
+  height: 50px;
   border: none;
   background-color: #901C1C;
   border-radius: 5px;
   cursor: pointer;
+  align-items: center;
 }
+
+.photographer__portrait {
+  height: 170px;
+  width: 170px;
+  border-radius: 50%;
+  background: #C4C4C4;
+  box-shadow: 0px 4px 12px
+  rgba(0, 0, 0, 25);
+  margin-right: 4em;
+}
+
+.photographer__selectOption {
+  display: flex;
+  margin: 2em 7em 2em;
+}
+
+
 
 .modal {
   border-radius: 5px;
   background-color: #DB8876;
-  width: 50%;
+  width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -73,4 +119,33 @@ form input {
   height: 68px;
   border: none;
   border-radius: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+.formData span {
+  color: #e00404;
+  font-size: 20px;
+}
+
+.text-control {
+  margin: 0;
+  padding: 8px;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 20px;
+  height: 48px;
+}
+
+textarea {
+  line-height: 1.5;
+  margin: 0;
+  font-size: 20px;
+  border-radius: 10px;
+  resize: none;
+  height: 200%;
+  width: 101%;
+  font-family: inherit;
 }

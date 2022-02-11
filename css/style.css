@@ -3,6 +3,7 @@
 body {
     font-family: "DM Sans", sans-serif;
     margin: 0;
+    margin-bottom: 4rem;
 }
 
 
@@ -45,7 +46,7 @@ h1 {
     height: 25px ;
 }
 
-.photographer_section article img {
+.img__portrait {
     
     height: 200px;
     width: 200px;
