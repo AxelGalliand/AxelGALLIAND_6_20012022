@@ -60,11 +60,48 @@
   margin-right: 4em;
 }
 
+.selectOption__label {
+  margin-right: 1em;
+  font-size: large;
+  font-weight: bold;
+}
+
+
 .photographer__selectOption {
   display: flex;
   margin: 2em 7em 2em;
+  align-items: center;
 }
 
+.photographer__selectOption--wraper {
+  display: flex;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 110px;
+  height: 30px;
+  border: none;
+  background-color: #901C1C;
+  border-radius: 5px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-between;
+  
+}
+
+.fa-chevron-up {
+  display: none;
+
+}
+
+.photographer__selectOption--wraper--btn--date {
+display: none;
+}
+
+.photographer__selectOption--wraper--btn--title {
+  display: none;
+}
 
 
 .modal {

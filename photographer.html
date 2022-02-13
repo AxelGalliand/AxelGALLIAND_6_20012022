@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/9b28388b6e.js" crossorigin="anonymous"></script>
     <title>Fisheye - photographe </title>
   </head>
   <body>
@@ -25,7 +26,14 @@
      </div>  
      <section class="photographer__selectOption">
       <label class="selectOption__label">Trier par</label> 
-      <div class="photographer__selectOption--wraper"></div>
+      <nav class="photographer__selectOption--wraper">
+       <p class="photographer__selectOption--wraper--btn--popular">Popularité</p>
+       <p class="photographer__selectOption--wraper--btn--date">Date</p>
+       <p class="photographer__selectOption--wraper--btn--title">Titre</p>
+       <i class="fas fa-chevron-up"></i>
+       <i class="fas fa-chevron-down"></i> 
+       
+      </nav>
      </section>
     </main>
     <div id="contact_modal">
@@ -45,7 +53,7 @@
               name="first"
             /><br>
                 <span class="firstNameErrorMsg hidden">2 caractères ou plus sont demandés</span>
-              </div>
+          </div>
               <div
                 class="formData">
                 <label for="last">Nom</label><br>
@@ -71,7 +79,6 @@
               class="formData">
               <label for="message">Message</label><br>
               <textarea
-                
                 id="message"
                 name="message"
                 rows="4"
