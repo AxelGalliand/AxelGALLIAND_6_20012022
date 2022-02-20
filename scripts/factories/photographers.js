@@ -1,10 +1,14 @@
 export function photographerFactory(data) {
-  const { name, city, country, tagline, price, portrait } = data;
+  const {id, name, city, country, tagline, price, portrait } = data;
 
   const picture = `Sample_Photos/Photographers_ID_Photos/${portrait}`;
+  const index = `data/photographers.json/${id}`;
 
   function getUserCardDOM() {
       const article = document.createElement( 'article' );
+      const link = document.createElement( 'a' );
+      link.className = "card__link";
+      link.href += `photographer.html?id=${id}`;
       const img = document.createElement( 'img' );
       img.className = "img__portrait";
       img.setAttribute("src", picture);
@@ -20,35 +24,13 @@ export function photographerFactory(data) {
       prices.className = "card__price";
       prices.textContent = price;
       prices.insertAdjacentHTML("beforeend","€/jour");
-      article.appendChild(img);
-      article.appendChild(h2);
+      article.appendChild(link);
+      link.appendChild(img);
+      link.appendChild(h2);
       article.appendChild(para);
       article.appendChild(tag);
       article.appendChild(prices);
       return (article);
   }
-  return { name, city, country, tagline, price, picture, getUserCardDOM }
+  return { index, name, city, country, tagline, price, picture, getUserCardDOM }
 }
-
-
-// const myImg = new Image(27,"titre","http://fdsfds.com/fdsfdds.jpg")
-// myImg.render()
-
-
-// function photographerFactory(data) {
-//   const { name, portrait } = data;
-
-//   const picture = `Sample_Photos/Photographers_ID_Photos/${portrait}`;
-
-//   function getUserCardDOM() {
-//       const article = document.createElement( 'article' );
-//       const img = document.createElement( 'img' );
-//       img.setAttribute("src", picture)
-//       const h2 = document.createElement( 'h2' );
-//       h2.textContent = name;
-//       article.appendChild(img);
-//       article.appendChild(h2);
-//       return (article);
-//   }
-//   return { name, picture, getUserCardDOM }
-// }

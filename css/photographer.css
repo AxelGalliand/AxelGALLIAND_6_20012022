@@ -79,30 +79,94 @@
   font-weight: bold;
   color: white;
   padding: 11px;
-  width: 110px;
-  height: 30px;
+  width: 130px;
+  height: 50px;
   border: none;
   background-color: #901C1C;
   border-radius: 5px;
   cursor: pointer;
   align-items: center;
   justify-content: space-between;
-  
 }
 
-.fa-chevron-up {
-  display: none;
-
+.photographer__portfolio {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  padding: 40px 2%;
+  width: 100%;
 }
 
-.photographer__selectOption--wraper--btn--date {
-display: none;
+.photographer__portfolio--media {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  width: 33.33%;
+  min-width: 380px;
+  min-height: 370px;
+  margin-bottom: 10px;
+  position: relative;
 }
 
-.photographer__selectOption--wraper--btn--title {
-  display: none;
+.photographer__portfolio--media--content {
+  width: 350px;
+  height: 300px;
+  border-radius: 5px;
+  object-fit: cover;
+  cursor: pointer;
+  position: relative;
 }
 
+.photographer__portfolio--media--info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: flex-start;
+  align-items: flex-start;
+  max-width: 350px;
+  height: 70px;
+  line-height: 2.25em;
+  color: #901c1c;
+  padding: 3px;
+  box-sizing: border-box;
+  font-weight: 400;
+}
+
+.photographer__portfolio--media--info--title {
+  font-size: 1.5em;
+  width: 270px;
+  margin: 0 10px 0 0;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+}
+
+.photographer__portfolio--media--info--like {
+  display: flex;
+  box-sizing: border-box;
+  width: 70px;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.photographer__portfolio--media--info--like--count {
+  font-weight: 500;
+  font-size: 1.5em;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+}
+
+.photographer__portfolio--media--info--like--heart {
+  font-weight: 400;
+  box-sizing: border-box;
+  width: 33px;
+  font-size: 1.25em;
+  margin: 0;
+}
 
 .modal {
   border-radius: 5px;

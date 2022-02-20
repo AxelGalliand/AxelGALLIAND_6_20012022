@@ -21,26 +21,38 @@
        <p class="photographer__local">London, UK</p>
        <p class="photographer__tagline">teste de tagline asser long pour voir </p>
       </article> 
-      <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+      <button class="contact_button">Contactez-moi</button>
       <img class="photographer__portrait" src="Sample_Photos/Photographers_ID_Photos/MimiKeel.jpg">
      </div>  
      <section class="photographer__selectOption">
       <label class="selectOption__label">Trier par</label> 
-      <nav class="photographer__selectOption--wraper">
-       <p class="photographer__selectOption--wraper--btn--popular">Popularité</p>
-       <p class="photographer__selectOption--wraper--btn--date">Date</p>
-       <p class="photographer__selectOption--wraper--btn--title">Titre</p>
-       <i class="fas fa-chevron-up"></i>
-       <i class="fas fa-chevron-down"></i> 
-       
-      </nav>
+      <select class="photographer__selectOption--wraper">
+        <option value="popularité">Popularité</option>
+        <option value="date">Date</option>
+        <option value="titre">Titre</option>
+      </select>
      </section>
+     <div class="photographer__portfolio">
+       <article class="photographer__portfolio--media">
+           <img class="photographer__portfolio--media--content" src="Sample_Photos/Ellie_Rose/Architecture_Water_on_Modern.jpg">
+
+         <div class="photographer__portfolio--media--info">
+           <h3 class="photographer__portfolio--media--info--title">Photo de l'eau</h3>
+           <div class="photographer__portfolio--media--info--like">
+             <span class="photographer__portfolio--media--info--like--count">26</span>
+             <i class="fa-heart far photographer__portfolio--media--info--like--heart"></i>
+           </div>
+         </div>
+       </article>
+        
+       
+    </div>
     </main>
     <div id="contact_modal">
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img src="assets/icons/close.svg" class="closecross" />
         </header>
 				<form>
 					<div
@@ -89,6 +101,6 @@
 				</form>
 			</div>
 		</div>
-    <script src="/scripts/utils/contactForm.js"></script>
+    <script type="module" src="scripts/photographer_main.js"></script>
   </body>
 </html>
