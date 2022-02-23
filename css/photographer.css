@@ -2,7 +2,8 @@
   display: none;
 }
 
-.photograph-header {
+
+.photographer__headerContent {
   display: flex;
   justify-content: space-between;
   background-color: #FAFAFA;
