@@ -12,6 +12,7 @@ document.querySelector (".contact_button")
   displayModal ()
 } )
 
+
 document.querySelector (".closecross")
 .addEventListener ("click",function(){
   closeModal ()
