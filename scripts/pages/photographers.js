@@ -44,31 +44,35 @@ const getMediaData = async (photographerMedia_Id) => {
 
 async function photographerPortfolio () {
 
-for ( let photographerMedia__content = 0; photographerMedia__content < selectedMedia.length; photographerMedia__content++){
+  for(const media of selectedMedia)
+  {
+  
+// for ( let photographerMedia__content = 0; photographerMedia__content < selectedMedia.length; photographerMedia__content++){
+
   const photographerMediaSection = document.querySelector(".photographer__portfolio");
   const photographerMedia__content = document.createElement("article");
   photographerMedia__content.className = "photographer__portfolio--media";
 
-  if (selectedMedia.video) {
+  if (media.video) {
   photographerMedia__content.innerHTML = `
-   <video class="photographer__portfolio--media--content" poster="Sample_Photos/${selectedMedia.video}">
-      <source src="Sample_Photos/${selectedMedia.video}#t=0.1" type="video/mp4">
+   <video class="photographer__portfolio--media--video" poster="Sample_Photos/${media.video}">
+      <source src="Sample_Photos/${media.video}#t=0.1" type="video/mp4">
    </video>  
    <div class="photographer__portfolio--media--info">
-      <h3 class="photographer__portfolio--media--info--title">${selectedMedia.title}</h3>
+      <h3 class="photographer__portfolio--media--info--title">${media.title}</h3>
       <div class="photographer__portfolio--media--info--like">
-        <span class="photographer__portfolio--media--info--like--count">${selectedMedia.likes}</span>
+        <span class="photographer__portfolio--media--info--like--count">${media.likes}</span>
         <i class="fa-heart far photographer__portfolio--media--info--like--heart"></i>
       </div>
    </div>
   `;
   }else {
   photographerMedia__content.innerHTML = `
-      <img class="photographer__portfolio--media--content" src="Sample_Photos/${selectedMedia.image}">
+      <img class="photographer__portfolio--media--content" src="Sample_Photos/${media.image}">
     <div class="photographer__portfolio--media--info">
-      <h3 class="photographer__portfolio--media--info--title">${selectedMedia.title}</h3>
+      <h3 class="photographer__portfolio--media--info--title">${media.title}</h3>
       <div class="photographer__portfolio--media--info--like">
-        <span class="photographer__portfolio--media--info--like--count">${selectedMedia.likes}</span>
+        <span class="photographer__portfolio--media--info--like--count">${media.likes}</span>
         <i class="fa-heart far photographer__portfolio--media--info--like--heart"></i>
       </div>
     </div>`;

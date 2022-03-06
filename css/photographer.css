@@ -1,5 +1,13 @@
 #contact_modal {
   display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: #e7938041;
 }
 
 
@@ -122,6 +130,15 @@
   position: relative;
 }
 
+.photographer__portfolio--media--video {
+  width: 350px;
+  height: 300px;
+  border-radius: 5px;
+  object-fit: cover;
+  cursor: pointer;
+  position: relative;
+}
+
 .photographer__portfolio--media--info {
   display: flex;
   flex-direction: row;
@@ -170,9 +187,15 @@
 }
 
 .modal {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   border-radius: 5px;
   background-color: #DB8876;
-  width: 30%;
+  width: 50%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -191,7 +214,7 @@
 }
 
 .modal header h2 {
-  font-size: 64px;
+  font-size: 38px;
   font-weight: normal;
   text-align: center;
 }
@@ -205,7 +228,7 @@ form {
 
 form label {
   color: #312E2E;
-  font-size: 36px;
+  font-size: 26px;
 }
 
 form div {
@@ -238,7 +261,7 @@ form input {
   width: 100%;
   border-radius: 8px;
   font-size: 20px;
-  height: 48px;
+  height: 28px;
 }
 
 textarea {
