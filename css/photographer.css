@@ -274,3 +274,25 @@ textarea {
   width: 101%;
   font-family: inherit;
 }
+
+.footer {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  position: fixed;
+  bottom: 0;
+  right: 3%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  width: 370px;
+  height: 60px;
+  line-height: 60px;
+  padding: 0 25px;
+  background-color: #db8876;
+  font-size: 24px;
+  font-weight: 500;
+  border-radius: 5px 5px 0 0;
+  user-select: none;
+}

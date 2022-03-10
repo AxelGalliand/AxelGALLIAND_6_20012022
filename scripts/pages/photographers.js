@@ -46,8 +46,6 @@ async function photographerPortfolio () {
 
   for(const media of selectedMedia)
   {
-  
-// for ( let photographerMedia__content = 0; photographerMedia__content < selectedMedia.length; photographerMedia__content++){
 
   const photographerMediaSection = document.querySelector(".photographer__portfolio");
   const photographerMedia__content = document.createElement("article");
@@ -78,8 +76,31 @@ async function photographerPortfolio () {
     </div>`;
   } 
  photographerMediaSection.appendChild(photographerMedia__content);
+ totalLikesArray.push(media.likes)
  }
 }
+
+
+
+
+const totalLikes = document.querySelector(".footer__likes--total");
+let totalLikesArray = []
+
+let sum = totalLikesArray.reduce((partialSum, a) => partialSum + a, 0);
+
+let totalMediaLike = totalLikesArray;
+totalLikes.innerHTML = `${sum}`;
+console.log(totalLikesArray);
+console.log(totalMediaLike);
+console.log(sum);
+
+
+// function likeNumber () {
+
+// }
+
+
+
 
 const selectedMedia = await getMediaData (photographer_Id);
 console.log(selectedMedia);
