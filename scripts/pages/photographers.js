@@ -47,65 +47,81 @@ async function photographerPortfolio () {
   for(const media of selectedMedia)
   {
 
-  const photographerMediaSection = document.querySelector(".photographer__portfolio");
-  const photographerMedia__content = document.createElement("article");
-  photographerMedia__content.className = "photographer__portfolio--media";
+    const photographerMediaSection = document.querySelector(".photographer__portfolio");
+    const photographerMedia__content = document.createElement("article");
+    photographerMedia__content.className = "photographer__portfolio--media";
 
-  if (media.video) {
-  photographerMedia__content.innerHTML = `
-   <video class="photographer__portfolio--media--video" poster="Sample_Photos/${media.video}">
+    if (media.video) {
+    photographerMedia__content.innerHTML = `
+     <video class="photographer__portfolio--media--video" poster="Sample_Photos/${media.video}">
       <source src="Sample_Photos/${media.video}#t=0.1" type="video/mp4">
-   </video>  
-   <div class="photographer__portfolio--media--info">
+     </video>  
+     <div class="photographer__portfolio--media--info">
       <h3 class="photographer__portfolio--media--info--title">${media.title}</h3>
       <div class="photographer__portfolio--media--info--like">
         <span class="photographer__portfolio--media--info--like--count">${media.likes}</span>
         <i class="fa-heart far photographer__portfolio--media--info--like--heart"></i>
       </div>
-   </div>
-  `;
-  }else {
-  photographerMedia__content.innerHTML = `
+     </div>
+    `;
+    }else {
+     photographerMedia__content.innerHTML = `
       <img class="photographer__portfolio--media--content" src="Sample_Photos/${media.image}">
-    <div class="photographer__portfolio--media--info">
-      <h3 class="photographer__portfolio--media--info--title">${media.title}</h3>
-      <div class="photographer__portfolio--media--info--like">
+      <div class="photographer__portfolio--media--info">
+       <h3 class="photographer__portfolio--media--info--title">${media.title}</h3>
+       <div class="photographer__portfolio--media--info--like">
         <span class="photographer__portfolio--media--info--like--count">${media.likes}</span>
         <i class="fa-heart far photographer__portfolio--media--info--like--heart"></i>
-      </div>
-    </div>`;
-  } 
- photographerMediaSection.appendChild(photographerMedia__content);
- totalLikesArray.push(media.likes)
- }
+       </div>
+      </div>`;
+    } 
+   photographerMediaSection.appendChild(photographerMedia__content);
+  }
+  const totalLikes = document.querySelector(".footer__likes--total");
+  let totalLikesArray = [];
+  for(const media of selectedMedia)
+  {
+  totalLikesArray.push(media.likes);
+  let sum = totalLikesArray.reduce((partialSum, a) => partialSum + a, 0);
+  
+  totalLikes.innerHTML = `${sum}`;
+  }
+  console.log(totalLikesArray);
+  
 }
 
+const selectedMedia = await getMediaData (photographer_Id);
+console.log(selectedMedia);
+
+// function totaleLikesFooter () {
 
 
+// const totalLikes = document.querySelector(".footer__likes--total");
+// let totalLikesArray = [];
+// totalLikesArray.push(selectedMedia.likes);
+// let sum = totalLikesArray.reduce((partialSum, a) => partialSum + a, 0);
 
-const totalLikes = document.querySelector(".footer__likes--total");
-let totalLikesArray = []
+// let totalMediaLike = totalLikesArray;
+// totalLikes.innerHTML = `${sum}`;
+// console.log(totalLikesArray);
+// console.log(totalMediaLike);
+// console.log(sum);
 
-let sum = totalLikesArray.reduce((partialSum, a) => partialSum + a, 0);
+// }
 
-let totalMediaLike = totalLikesArray;
-totalLikes.innerHTML = `${sum}`;
-console.log(totalLikesArray);
-console.log(totalMediaLike);
-console.log(sum);
-
+// totaleLikesFooter ();
 
 // function likeNumber () {
 
 // }
 
 
+// const selectedMedia = await getMediaData (photographer_Id);
+// console.log(selectedMedia);
 
-
-const selectedMedia = await getMediaData (photographer_Id);
-console.log(selectedMedia);
-
-
+async function photographerFooter (photographer) {
+  const photographerpherPrice = document.querySelector(".footer__priceday").innerHTML = `${photographer.price}/jours`;
+}
 photographerHeader(selectedPhotographer);
 
 document.querySelector (".contact_button")
@@ -118,4 +134,6 @@ document.querySelector (".closecross")
   closeModal ()
 })
 
-photographerPortfolio ();
+photographerPortfolio (selectedMedia);
+
+photographerFooter(selectedPhotographer);
