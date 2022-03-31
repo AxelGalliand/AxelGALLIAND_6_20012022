@@ -8,19 +8,9 @@ export function MediaFactory(mediaData) {
     let price = mediaData.price;
 
 
-    const dataLikes = document.querySelector(".photographer__portfolio--media--info--like");
-    dataLikes .addEventListener("click", incLike) ;
-    function incLike() {
-      document.getElementById('like__heart').className = "fa-heat fas photographer__portfolio--media--info--like--heart";
-
-        likes += 1 ;
-        // mettre a jour le dom de ce media
-    }
 
     function render() {
 
-    
-      
           const photographerMediaSection = document.querySelector(".photographer__portfolio");
           const photographerMedia__content = document.createElement("article");
           photographerMedia__content.className = "photographer__portfolio--media";
@@ -34,7 +24,7 @@ export function MediaFactory(mediaData) {
             <h3 class="photographer__portfolio--media--info--title">${title}</h3>
             <div class="photographer__portfolio--media--info--like">
               <span class="photographer__portfolio--media--info--like--count">${likes}</span>
-              <i id="like__heart" class="fa-heart far photographer__portfolio--media--info--like--heart"></i>
+              <i id="like__heart" class="far fa-heart photographer__portfolio--media--info--like--heart"></i>
             </div>
            </div>
           `;
@@ -45,13 +35,30 @@ export function MediaFactory(mediaData) {
              <h3 class="photographer__portfolio--media--info--title">${title}</h3>
              <div class="photographer__portfolio--media--info--like">
               <span class="photographer__portfolio--media--info--like--count">${likes}</span>
-              <i id="like__heart" class="fa-heart far photographer__portfolio--media--info--like--heart"></i>
+              <i id="like__heart" class="far fa-heart photographer__portfolio--media--info--like--heart"></i>
              </div>
             </div>`;
           } 
+          
          photographerMediaSection.appendChild(photographerMedia__content);
-        }
-        
+         
+        //  const dataLikes = document.querySelector(".photographer__portfolio--media--info--like");
+        //  dataLikes.onclick = incLike;
+        //  function incLike() {
+        //  document.getElementById('like__heart').className = "fas fa-heart photographer__portfolio--media--info--like--heart";
 
-    return {id, title, image, video, likes, date ,price, render, dataLikes, incLike}
+        //  }
+        //    console.log(incLike);
+    }
+        
+        // const dataLikes = document.querySelector(".photographer__portfolio--media--info--like");
+        // dataLikes .addEventListener("click", incLike) ;
+        // function incLike() {
+        //   document.getElementById('like__heart').className = "fa-heat fas photographer__portfolio--media--info--like--heart";
+    
+        //     likes += 1 ;
+        //     // mettre a jour le dom de ce media
+        // }
+
+    return {id, title, image, video, likes, date ,price, render}
 }

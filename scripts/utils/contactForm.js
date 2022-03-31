@@ -1,28 +1,42 @@
-export function displayModal() {
-  const modal = document.getElementById("contact_modal");
-modal.style.display = "block";
+
+async function fetchPhotographers() {
+  return fetch("../../../data/photographers.json")
+  .then(function(result) {
+    if(result.ok) {
+      return result.json();
+    }
+  })
 }
+const getPhotographerData = async (UserId) => {
+  const data = await fetchPhotographers ();
+  const selectedPhotographer = data.photographers.filter((photographer) => photographer.id === UserId ) [0]
+  return selectedPhotographer;
+}
+function photographerNameModal(name) {
+  const modalHeaderDom = document.querySelector(".modalheader");
+  const modalHeaderName = document.createElement("h2");
+  modalHeaderDom.innerHTML="";
+  modalHeaderName.className = "modale__h2";
+  modalHeaderName.innerHTML = `Contactez ${name}`;
+  modalHeaderDom.appendChild(modalHeaderName)
+
+}
+// const photographer_Id = Number (new URLSearchParams(window.location.search).get("id"));
+// const selectedPhotographer = await getPhotographerData (photographer_Id);
+
+export function displayModal(name) {
+  const modal = document.getElementById("contact_modal");
+  photographerNameModal(name);
+  modal.style.display = "block";
+}
+
 export function closeModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "none";
 } 
 
-// document.querySelector (".contact_button")
-// .addEventListener ("click",function() {
-//   displayModal ()
-// } )
-
-
-// document.querySelector (".closecross")
-// .addEventListener ("click",function(){
-//   closeModal ()
-// })
 const $registrationForm = document.querySelector(".contact__form");
 const regexname = /^[A-Z|a-z|-]{2,}$/;
-
-const photographerNameContact = document.getElementsByClassName("modal__h2");
-// photographerNameContact.innerHTML = `Contactez-moi ${}`
-
 
 function checkAll() {
   const firstNameInput = document.getElementById("first").value;
@@ -69,10 +83,11 @@ $registrationForm.addEventListener("submit", function(event) {
   event.preventDefault()
 // if all booleans are true
   if (formValid()) {
-   const formValid = document.getElementById("formValid")
+   const formValid = document.getElementById("contact__form")
     formValid.style.display = "none"
-
-    const validationMessage = document.getElementById("validationMessage")
-    validationMessage.style.display = "block"
+   const formValidMessage = document.getElementById("validationForm")
+    formValidMessage.style.display = "block"
+    // const validationMessage = document.getElementById("validationMessage")
+    // validationMessage.style.display = "block"
   } 
 })

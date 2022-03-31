@@ -32,11 +32,23 @@ async function photographerHeader (photographer) {
  photographerheaderSection.appendChild(photographerHeader__content);
 }
 
-
 const getMediaData = async (photographerMedia_Id) => {
   const data = await fetchPhotographers ();
   const selectedMedia = data.media.filter ((media) => media.photographerId === photographerMedia_Id);
   return selectedMedia;
+}
+
+function totalLikes (medias) {
+  const totalLikesDom = document.querySelector(".footer__likes--total");
+  let totalLikesArray = [];
+  for(const media of medias)
+  {
+  totalLikesArray.push(media.likes);
+  let sum = totalLikesArray.reduce((partialSum, a) => partialSum + a, 0);
+  
+  totalLikesDom.innerHTML = `${sum}`;
+  }
+  
 }
 
 async function photographerPortfolio (medias) {
@@ -45,22 +57,33 @@ async function photographerPortfolio (medias) {
     media.render()
   }
   
-  const totalLikes = document.querySelector(".footer__likes--total");
-  let totalLikesArray = [];
-  for(const media of medias)
-  {
-  totalLikesArray.push(media.likes);
-  let sum = totalLikesArray.reduce((partialSum, a) => partialSum + a, 0);
+  totalLikes (medias);
   
-  totalLikes.innerHTML = `${sum}`;
-  }
+    const dataLikes = document.querySelectorAll(".photographer__portfolio--media--info--like");
+   
+    dataLikes.forEach((dataLike, idx) => {
+      const likesQuantity = dataLike.querySelector(".photographer__portfolio--media--info--like--count");
+      const likeHeart = dataLike.querySelector("#like__heart");
+      dataLike.addEventListener("click",  () => {
+        medias[idx].isLiked = !medias[idx].isLiked;
   
-  console.log(totalLikesArray);
+        if (medias[idx].isLiked) {
+          medias[idx].likes += 1;
+          likeHeart.classList.remove("far");
+          likeHeart.classList.add("fas");
+          totalLikes (medias)
+        }else {
+          medias[idx].likes -= 1;
+          likeHeart.classList.remove("fas");
+          likeHeart.classList.add("far");
+          totalLikes (medias)
+      }
+      
+      likesQuantity.textContent = medias[idx].likes;
+    })
+    })
   
 }
-
-// const selectedMedia = await getMediaData (photographer_Id);
-// console.log(selectedMedia);
 
 async function photographerFooter (photographer) {
   const photographerpherPrice = document.querySelector(".footer__priceday").innerHTML = `${photographer.price}/jours`;
@@ -75,26 +98,23 @@ console.log (selectedPhotographer);
 let  selectedMedia = await getMediaData (photographer_Id);
 selectedMedia = selectedMedia.map((data) => MediaFactory(data));
 console.log(selectedMedia);
-console.log(MediaFactory);
-
-// console.log(getTotalLikes(selectedMedia))
-
-
 
 photographerHeader(selectedPhotographer);
 
-
+photographerPortfolio (selectedMedia);
 
 document.querySelector (".contact_button")
-.addEventListener ("click",function() {
-  displayModal ()
-} )
-
-document.querySelector (".closecross")
 .addEventListener ("click",function(){
-  closeModal ()
+  displayModal (selectedPhotographer.name)
 })
 
-photographerPortfolio (selectedMedia);
+const closeCross = document.querySelectorAll (".closecross");
+
+closeCross.forEach((elem) => {
+  elem.addEventListener ("click",function(){
+    closeModal ()
+  })
+});
+
 
 photographerFooter(selectedPhotographer);

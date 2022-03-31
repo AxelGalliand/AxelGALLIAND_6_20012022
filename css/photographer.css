@@ -10,6 +10,9 @@
   background-color: #e7938041;
 }
 
+#contact__form {
+  display: block;
+}
 
 .photographer__headerContent {
   display: flex;
@@ -170,6 +173,7 @@
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+  color: #901C1C;
 }
 
 .photographer__portfolio--media--info--like--count {
@@ -186,6 +190,7 @@
   font-size: 1.25em;
   margin: 0;
   cursor: pointer;
+  color: #901C1C;
 }
 
 .modal {
@@ -197,7 +202,7 @@
   border-radius: 5px;
   background-color: #DB8876;
   width: 50%;
-  height: fit-content;
+  max-height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -211,14 +216,16 @@
   width: 100%;
 }
 
-.modal header img {
-  cursor: pointer;
-}
-
 .modal header h2 {
   font-size: 38px;
   font-weight: normal;
   text-align: center;
+}
+
+.modal img {
+  padding-left: 100%;
+  cursor: pointer;
+  max-width: 4%;
 }
 
 form {
@@ -276,6 +283,15 @@ textarea {
   width: 101%;
   font-family: inherit;
 }
+
+#validationForm {
+  display: none;
+}
+#validationMessage {
+  font-size: x-large;
+
+}
+
 
 .footer {
   font-family: "DM Sans", sans-serif;

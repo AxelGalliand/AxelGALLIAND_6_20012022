@@ -42,11 +42,11 @@
         
     <div id="contact_modal">
 			<div class="modal">
-				<header>
-          <h2 class="modal__h2">Contactez-moi</h2>
-          <img src="assets/icons/close.svg" class="closecross" />
+        <img src="assets/icons/close.svg" class="closecross" />
+				<header class="modalheader">
+         
         </header>
-				<form class="contact__form">
+				<form id="contact__form" class="contact__form">
 					<div
             class="formData">
             <label for="first">Prénom</label><br>
@@ -91,6 +91,12 @@
             </div>
           <button class="contact_button">Envoyer</button>
 				</form>
+        <div id="validationForm">
+          <p id="validationMessage">message à bien été envoyé</p> <br>
+          <button class=" contact_button closecross" id="closeForm">
+            Fermer
+          </button>
+          </div>
 			</div>
 		</div>
     <script type="module" src="scripts/pages/photographers.js"></script>
