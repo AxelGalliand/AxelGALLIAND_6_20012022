@@ -34,8 +34,8 @@ async function photographerHeader (photographer) {
 
 const getMediaData = async (photographerMedia_Id) => {
   const data = await fetchPhotographers ();
-  const selectedMedia = data.media.filter ((media) => media.photographerId === photographerMedia_Id);
-  return selectedMedia;
+  const selectedMediaFilter = data.media.filter ((media) => media.photographerId === photographerMedia_Id);
+  return selectedMediaFilter;
 }
 
 function totalLikes (medias) {
@@ -43,8 +43,10 @@ function totalLikes (medias) {
   let totalLikesArray = [];
   for(const media of medias)
   {
-  totalLikesArray.push(media.likes);
-  let sum = totalLikesArray.reduce((partialSum, a) => partialSum + a, 0);
+  // totalLikesArray.push(media.likes);
+  totalLikesArray.push(media.getLike());
+
+  let sum = totalLikesArray.reduce((partialSum, a) => partialSum + a);
   
   totalLikesDom.innerHTML = `${sum}`;
   }
@@ -68,19 +70,23 @@ async function photographerPortfolio (medias) {
         medias[idx].isLiked = !medias[idx].isLiked;
   
         if (medias[idx].isLiked) {
-          medias[idx].likes += 1;
+          // medias[idx].likes += 1;
+          medias[idx].inc();
+          console.log(medias[idx].getLike())
           likeHeart.classList.remove("far");
           likeHeart.classList.add("fas");
           totalLikes (medias)
         }else {
-          medias[idx].likes -= 1;
+          // medias[idx].likes -= 1;
+          medias[idx].dec();
           likeHeart.classList.remove("fas");
           likeHeart.classList.add("far");
           totalLikes (medias)
-      }
+        }
       
-      likesQuantity.textContent = medias[idx].likes;
-    })
+      // likesQuantity.textContent = medias[idx].likes;
+        likesQuantity.textContent = medias[idx].getLike();
+      })
     })
   
 }
@@ -99,6 +105,21 @@ let  selectedMedia = await getMediaData (photographer_Id);
 selectedMedia = selectedMedia.map((data) => MediaFactory(data));
 console.log(selectedMedia);
 
+function mediaSortDate () {
+// selectedMedia.sort((a,b) => b.date - a.date)
+selectedMedia.sort((a,b) => b.date < a.date ? -1 : 1)
+}
+
+function mediaSortpopularity () {
+  // selectedMedia.sort((a,b) => b.likes - a.likes)
+  selectedMedia.sort((a,b) => b.likes < a.likes ? -1 : 1)
+}
+
+function mediaSortTitle () {
+  // selectedMedia.sort((a,b) => b.title - a.title)
+  selectedMedia.sort((a,b) => b.title < a.title ? 1 : -1)
+}
+
 photographerHeader(selectedPhotographer);
 
 photographerPortfolio (selectedMedia);
@@ -115,6 +136,120 @@ closeCross.forEach((elem) => {
     closeModal ()
   })
 });
+
+document.querySelector (".photographer__selectOption").addEventListener ("change", (e) => {
+  console.log("before", selectedMedia);
+
+  switch (e.target.value) {
+    case 'date':
+      mediaSortDate()
+      break;
+    case 'popularité':
+      mediaSortpopularity()
+      break;
+    case 'titre':
+      mediaSortTitle ()
+      break;
+    default:
+      mediaSortpopularity()
+  }
+
+  console.log("after", selectedMedia);
+  const photographerMediaSection = document.querySelector(".photographer__portfolio");
+  photographerMediaSection.innerHTML = "";
+
+  photographerPortfolio (selectedMedia);
+  lightbox.init();
+});
+
+class lightbox {
+   static init (){
+    const links = Array.from(document.querySelectorAll('a[href$=".jpg"], a[href$=".mp4"]'))
+    const gallery = links.map(link => link.getAttribute('href'))
+     links.forEach(link => link.addEventListener('click' , e => {
+       e.preventDefault()
+       new lightbox(e.currentTarget.getAttribute('href'), gallery)
+     }))
+   }
+
+   constructor (url, gallery) {
+    this.element = this.buildDOM(url)
+    this.images = gallery
+    this.loadImage(url)
+    this.onKeyUp = this.onKeyUp.bind(this)
+    document.body.appendChild(this.element)
+    document.addEventListener('keyup', this.onKeyUp)
+   }
+
+   loadImage (url) {
+     this.url = null
+    const image = new Image()
+    const container = this.element.querySelector('.lightbox__container')
+    container.innerHTML = ''
+    image.onload = () => {
+      container.appendChild(image)
+      this.url = url
+    }
+    image.src = url
+   }
+   
+onKeyUp (e) {
+  if (e.key == 'Escape') {
+    this.close(e)
+  } else if (e.key == 'ArrowLeft') {
+    this.prev(e)
+  } else if (e.key == 'ArrowRight') {
+    this.next(e)
+  }
+}
+
+close (e) {
+  e.preventDefault()
+  this.element.classList.add('fadeOut')
+  window.setTimeout(() => {
+  this.element.parentElement.removeChild(this.element)
+  }, 500)
+  document.removeEventListener('keyup', this.onKeyUp)
+}
+
+next (e) {
+  e.preventDefault ()
+  let i = this.images.findIndex(image => image == this.url)
+  if (i == this.images.length - 1) {
+    i= -1
+  }
+  this.loadImage(this.images[i + 1])
+}
+
+prev (e) {
+  e.preventDefault ()
+  let i = this.images.findIndex(image => image == this.url)
+  if (i == 0) {
+    i = this.images.length
+  }
+  this.loadImage(this.images[i - 1])
+}
+
+   buildDOM (url) {
+     const dom = document.createElement('div')
+     dom.classList.add('lightbox')
+     dom.innerHTML = `<button class="lightbox__close"></button>
+     <button class="lightbox__next"></button>
+     <button class="lightbox__prev"></button>
+     <div class="lightbox__container"></div>
+     <div class="lightbox__title">${url.title}</div>`
+     dom.querySelector('.lightbox__close').addEventListener('click',
+     this.close.bind(this))
+     dom.querySelector('.lightbox__next').addEventListener('click',
+     this.next.bind(this))
+     dom.querySelector('.lightbox__prev').addEventListener('click',
+     this.prev.bind(this))
+     return dom
+   }
+
+  }
+
+   lightbox.init();
 
 
 photographerFooter(selectedPhotographer);
