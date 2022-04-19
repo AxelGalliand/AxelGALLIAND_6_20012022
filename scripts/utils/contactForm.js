@@ -38,6 +38,7 @@ export function closeModal() {
 const $registrationForm = document.querySelector(".contact__form");
 const regexname = /^[A-Z|a-z|-]{2,}$/;
 
+
 function checkAll() {
   const firstNameInput = document.getElementById("first").value;
   const $firstNameErrorMsg = document.querySelector(".firstNameErrorMsg");
@@ -45,6 +46,7 @@ function checkAll() {
 
   if (firstNameValid) {
     $firstNameErrorMsg.classList.add("hidden");
+    console.log('prénom : ',firstNameInput)
   } else {
     $firstNameErrorMsg.classList.remove("hidden");
   }
@@ -56,6 +58,7 @@ function checkAll() {
 
   if (lastNameValid) {
     $lastNameErrorMsg.classList.add("hidden");
+    console.log('nom : ',lastNameInput)
   } else {
     $lastNameErrorMsg.classList.remove("hidden");
   }
@@ -68,13 +71,26 @@ function checkAll() {
 
   if (emailValid) {
     $emailErrorMsg.classList.add("hidden")
+    console.log('email : ',emailInput)
   } else {
     $emailErrorMsg.classList.remove("hidden")
   }
+  
+  const messageInput = document.getElementById("message").value;
+  const regExMesage = /^[A-Z|a-z|0-9| éèëêîïôûùâàô.;!#$%&'*+=?^_`{|}~-]{2,}$/;
+  const $messageErrorMsg = document.querySelector(".messageErrorMsg");
+  const messageValid = regExMesage.test(messageInput)
 
+  if (messageValid) {
+    $messageErrorMsg.classList.add("hidden")
+    console.log('message : ',messageInput)
+  } else {
+    $messageErrorMsg.classList.remove("hidden")
+  }
 
-  if (firstNameValid && lastNameValid && emailValid )
+  if (firstNameValid && lastNameValid && emailValid && messageValid)
   return true
+ 
 }
 
 const formValid = () => checkAll() 
@@ -87,6 +103,7 @@ $registrationForm.addEventListener("submit", function(event) {
     formValid.style.display = "none"
    const formValidMessage = document.getElementById("validationForm")
     formValidMessage.style.display = "block"
+
     // const validationMessage = document.getElementById("validationMessage")
     // validationMessage.style.display = "block"
   } 

@@ -68,6 +68,7 @@ class Media {
     this.id = mediaData.id;
     this.title = mediaData.title;
     this.image = mediaData.image;
+    this.isLiked = false;
     this.video = mediaData.video;
     this.likes = mediaData.likes;
     this.date = mediaData.date;
@@ -100,14 +101,14 @@ class Video extends Media{
         photographerMedia__content.innerHTML = `
          <a href="Sample_Photos/${this.video}"> 
           <video class="photographer__portfolio--media--video" poster="Sample_Photos/${this.video}">
-            <source src="Sample_Photos/${this.video}#t=0.1" type="video/mp4">
+            <source title="${this.title}" src="Sample_Photos/${this.video}#t=0.1" type="video/mp4">
           </video> 
          </a>  
          <div class="photographer__portfolio--media--info">
           <h3 class="photographer__portfolio--media--info--title">${this.title}</h3>
           <div class="photographer__portfolio--media--info--like">
             <span class="photographer__portfolio--media--info--like--count">${this.likes}</span>
-            <i id="like__heart" class="far fa-heart photographer__portfolio--media--info--like--heart"></i>
+            <i id="like__heart" class="${this.isLiked === true ? 'fas' : 'far'} fa-heart photographer__portfolio--media--info--like--heart"></i>
           </div>
          </div>
         `;
@@ -136,7 +137,7 @@ class Image extends Media {
            <h3 class="photographer__portfolio--media--info--title">${this.title}</h3>
            <div class="photographer__portfolio--media--info--like">
             <span class="photographer__portfolio--media--info--like--count">${this.likes}</span>
-            <i id="like__heart" class="far fa-heart photographer__portfolio--media--info--like--heart"></i>
+            <i id="like__heart" class="${this.isLiked === true ? 'fas' : 'far'} fa-heart photographer__portfolio--media--info--like--heart"></i>
            </div>
           </div>`;
         
@@ -150,7 +151,7 @@ export function MediaFactory(mediaData) {
   if (mediaData.video) {
     return new Video(mediaData);
   } else {
-  return new Image(mediaData)
+    return new Image(mediaData)
   }
 }
 

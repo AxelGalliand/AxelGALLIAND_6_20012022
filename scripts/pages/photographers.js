@@ -43,7 +43,6 @@ function totalLikes (medias) {
   let totalLikesArray = [];
   for(const media of medias)
   {
-  // totalLikesArray.push(media.likes);
   totalLikesArray.push(media.getLike());
 
   let sum = totalLikesArray.reduce((partialSum, a) => partialSum + a);
@@ -66,13 +65,13 @@ async function photographerPortfolio (medias) {
     dataLikes.forEach((dataLike, idx) => {
       const likesQuantity = dataLike.querySelector(".photographer__portfolio--media--info--like--count");
       const likeHeart = dataLike.querySelector("#like__heart");
+      console.log(medias[0].isLiked)
       dataLike.addEventListener("click",  () => {
         medias[idx].isLiked = !medias[idx].isLiked;
   
         if (medias[idx].isLiked) {
           // medias[idx].likes += 1;
           medias[idx].inc();
-          console.log(medias[idx].getLike())
           likeHeart.classList.remove("far");
           likeHeart.classList.add("fas");
           totalLikes (medias)
@@ -169,28 +168,42 @@ class lightbox {
      links.forEach(link => link.addEventListener('click' , e => {
        e.preventDefault()
        new lightbox(e.currentTarget.getAttribute('href'), gallery)
+       console.log(gallery);
      }))
    }
 
    constructor (url, gallery) {
     this.element = this.buildDOM(url)
-    this.images = gallery
-    this.loadImage(url)
+    this.medias = gallery
+    this.loadMedia(url)
     this.onKeyUp = this.onKeyUp.bind(this)
     document.body.appendChild(this.element)
     document.addEventListener('keyup', this.onKeyUp)
    }
 
-   loadImage (url) {
-     this.url = null
-    const image = new Image()
-    const container = this.element.querySelector('.lightbox__container')
-    container.innerHTML = ''
-    image.onload = () => {
-      container.appendChild(image)
-      this.url = url
-    }
-    image.src = url
+   loadMedia (url) {
+     if (url.endsWith(".jpg")) {
+      this.url = null
+      const image = new Image()
+      const container = this.element.querySelector('.lightbox__container')
+      container.innerHTML = ''
+      image.onload = () => {
+        container.appendChild(image)
+        this.url = url
+      }
+      image.src = url
+     } else {
+      this.url = null
+      const video = video
+      const container = this.element.querySelector('.lightbox__container')
+      container.innerHTML = ''
+      video.onload = () => {
+        container.appendChild(video)
+        this.url = url
+      }
+      video.src = url
+     }
+    
    }
    
 onKeyUp (e) {
@@ -214,38 +227,52 @@ close (e) {
 
 next (e) {
   e.preventDefault ()
-  let i = this.images.findIndex(image => image == this.url)
-  if (i == this.images.length - 1) {
+  let i = this.medias.findIndex(image => image == this.url)
+  if (i == this.medias.length - 1) {
     i= -1
   }
-  this.loadImage(this.images[i + 1])
+  this.loadMedia(this.medias[i + 1])
+  const imageDomList = [...document.querySelectorAll(".photographer__portfolio--media--content")];
+  const selectedImageDom = imageDomList.find((img) => img.src.includes(this.medias[i + 1]) );
+
+  document.querySelector(".lightbox__title").textContent = selectedImageDom.title;
 }
 
 prev (e) {
   e.preventDefault ()
-  let i = this.images.findIndex(image => image == this.url)
+  let i = this.medias.findIndex(image => image == this.url)
   if (i == 0) {
-    i = this.images.length
+    i = this.medias.length
   }
-  this.loadImage(this.images[i - 1])
+  this.loadMedia(this.medias[i - 1])
+  const imageDomList = [...document.querySelectorAll(".photographer__portfolio--media--content")];
+  const selectedImageDom = imageDomList.find((img) => img.src.includes(this.medias[i - 1]) );
+
+  document.querySelector(".lightbox__title").textContent = selectedImageDom.title;
 }
 
-   buildDOM (url) {
-     const dom = document.createElement('div')
-     dom.classList.add('lightbox')
-     dom.innerHTML = `<button class="lightbox__close"></button>
-     <button class="lightbox__next"></button>
-     <button class="lightbox__prev"></button>
-     <div class="lightbox__container"></div>
-     <div class="lightbox__title">${url.title}</div>`
-     dom.querySelector('.lightbox__close').addEventListener('click',
-     this.close.bind(this))
-     dom.querySelector('.lightbox__next').addEventListener('click',
-     this.next.bind(this))
-     dom.querySelector('.lightbox__prev').addEventListener('click',
-     this.prev.bind(this))
-     return dom
-   }
+buildDOM (url) {
+  const dom = document.createElement('div')
+  const imageDomList = [...document.querySelectorAll(".photographer__portfolio--media--content")];
+  const videoSourceDomList = [...document.querySelectorAll(".photographer__portfolio--media--video > source")]; 
+
+  const selectedMediaDom = [...imageDomList,...videoSourceDomList ].find((img) => img.src.includes(url) );
+
+  console.log(selectedMediaDom)
+  dom.classList.add('lightbox')
+  dom.innerHTML = `<button class="lightbox__close"></button>
+  <button class="lightbox__next"></button>
+  <button class="lightbox__prev"></button>
+  <div class="lightbox__container"></div>
+  <div class="lightbox__title">${selectedMediaDom.title}</div>`
+  dom.querySelector('.lightbox__close').addEventListener('click',
+  this.close.bind(this))
+  dom.querySelector('.lightbox__next').addEventListener('click',
+  this.next.bind(this))
+  dom.querySelector('.lightbox__prev').addEventListener('click',
+  this.prev.bind(this))
+  return dom
+}
 
   }
 
