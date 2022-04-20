@@ -2,7 +2,7 @@ import {displayModal, closeModal} from "../utils/contactForm.js"
 import { MediaFactory } from "../factories/medias.js"
 
 async function fetchPhotographers() {
-  return fetch("./../../../data/photographers.json")
+  return fetch("./data/photographers.json")
   .then(function(result) {
     if(result.ok) {
       return result.json();
