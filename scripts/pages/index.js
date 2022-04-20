@@ -1,7 +1,7 @@
 import {photographerFactory} from "../factories/photographers.js"
 
 async function getPhotographers() {
-  return fetch("../../data/photographers.json")
+  return fetch("./../../data/photographers.json")
   .then(function(result) {
     if(result.ok) {
       return result.json();
