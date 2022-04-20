@@ -2,7 +2,7 @@ import {displayModal, closeModal} from "../utils/contactForm.js"
 import { MediaFactory } from "../factories/medias.js"
 
 async function fetchPhotographers() {
-  return fetch("./data/photographers.json")
+  return fetch("./../../../data/photographers.json")
   .then(function(result) {
     if(result.ok) {
       return result.json();
@@ -193,23 +193,27 @@ class lightbox {
       }
       image.src = url
      } else {
-      this.url = null
-      const video = document.createElement('video');
-      video.setAttribute('src','Sample_Photos/Sport_Tricks_in_the_air.mp4');
+      this.url = null;
+      const video = document.createElement("video");
+      video.setAttribute("controls", "");
       video.width = 480;
       video.height = 320;
-      const videoSource = document.createElement('source');
-      videoSource.setAttribute('src','Sample_Photos/Sport_Tricks_in_the_air.mp4#t=0.1');
-      videoSource.setAttribute('type','video/mp4');
-      video.appendChild(videoSource);
-      const container = this.element.querySelector('.lightbox__container')
-      container.innerHTML = ''
-      video.onload = () => {
-        container.appendChild(video)
-        this.url = url
-      }
-      video.src = url
-     }
+      const videoSource = document.createElement("source");
+      videoSource.setAttribute("src", '${url}');
+      videoSource.setAttribute("type", "video/mp4");
+
+      const container = this.element.querySelector('.lightbox__container');
+      container.innerHTML = ""
+      video.innerHTML = videoSource;
+
+      container.appendChild(video);
+
+      const containerVideo = this.element.querySelector(".lightbox__container--video");
+      containerVideo.appendChild(videoSource);
+
+      this.url = url;
+      video.src = url;
+    }
     
    }
    
@@ -261,9 +265,9 @@ prev (e) {
 buildDOM (url) {
   const dom = document.createElement('div')
   const imageDomList = [...document.querySelectorAll(".photographer__portfolio--media--content")];
-  const videoDomList = [...document.querySelectorAll(".photographer__portfolio--media--video")]; 
+  const videoSourceDomList = [...document.querySelectorAll(".photographer__portfolio--media--video > source")]; 
 
-  const selectedMediaDom = [...imageDomList,...videoDomList ].find((img) => img.src.includes(url) );
+  const selectedMediaDom = [...imageDomList,...videoSourceDomList ].find((img) => img.src.includes(url) );
 
   console.log(selectedMediaDom)
   dom.classList.add('lightbox')
