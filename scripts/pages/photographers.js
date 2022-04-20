@@ -261,9 +261,9 @@ prev (e) {
 buildDOM (url) {
   const dom = document.createElement('div')
   const imageDomList = [...document.querySelectorAll(".photographer__portfolio--media--content")];
-  const videoSourceDomList = [...document.querySelectorAll(".photographer__portfolio--media--video > source")]; 
+  const videoDomList = [...document.querySelectorAll(".photographer__portfolio--media--video")]; 
 
-  const selectedMediaDom = [...imageDomList,...videoSourceDomList ].find((img) => img.src.includes(url) );
+  const selectedMediaDom = [...imageDomList,...videoDomList ].find((img) => img.src.includes(url) );
 
   console.log(selectedMediaDom)
   dom.classList.add('lightbox')

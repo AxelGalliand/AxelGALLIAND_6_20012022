@@ -101,8 +101,8 @@ class Video extends Media{
     
         photographerMedia__content.innerHTML = `
          <a href="Sample_Photos/${this.video}"> 
-          <video class="photographer__portfolio--media--video" poster="Sample_Photos/${this.video}">
-            <source title="${this.title}" src="Sample_Photos/${this.video}#t=0.1" type="video/mp4">
+          <video class="photographer__portfolio--media--video" title="${this.title}" poster="Sample_Photos/${this.video}" src="Sample_Photos/${this.video}#t=0.1" type="video/mp4">
+
           </video> 
          </a>  
          <div class="photographer__portfolio--media--info">
