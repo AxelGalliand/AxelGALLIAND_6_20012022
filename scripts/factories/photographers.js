@@ -12,6 +12,7 @@ export function photographerFactory(data) {
       const img = document.createElement( 'img' );
       img.className = "img__portrait";
       img.setAttribute("src", picture);
+      img.setAttribute("alt", "portrait du photographe");
       const h2 = document.createElement( 'h2' );
       h2.textContent = name;
       const para = document.createElement( 'p' );

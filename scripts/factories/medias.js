@@ -86,6 +86,7 @@ class Media {
   getLike() {
     return this.likes;
   }
+
 }
 
 

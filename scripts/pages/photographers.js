@@ -22,12 +22,12 @@ async function photographerHeader (photographer) {
   photographerHeader__content.className = "photographer__headerContent";
   photographerHeader__content.innerHTML = `
   <article class="photographer__info"> 
-    <h1 class="photographer__h1">${photographer.name}</h1>
-    <p class="photographer__local">${photographer.city}, ${photographer.country}</p>
-    <p class="photographer__tagline">${photographer.tagline}</p>
+    <h1 class="photographer__h1" tabindex="2" aria-label="${photographer.name}">${photographer.name}</h1>
+    <p class="photographer__local" tabindex="3" aria-label="localisation du photographe">${photographer.city}, ${photographer.country}</p>
+    <p class="photographer__tagline" tabindex="4" aria-label="slogan du photographe">${photographer.tagline}</p>
   </article>
-  <button class="contact_button">Contactez-moi</button>
-  <img class="photographer__portrait" src="Sample_Photos/Photographers_ID_Photos/${photographer.portrait}" alt="portrait de ${photographer.name}"> `;
+  <button class="contact_button" aria-label="formulaire de contact" tabindex="5">Contactez-moi</button>
+  <img class="photographer__portrait" src="Sample_Photos/Photographers_ID_Photos/${photographer.portrait}" tabindex="6" alt="portrait de ${photographer.name}" aria-label="portrait de ${photographer.name}"> `;
 
  photographerheaderSection.appendChild(photographerHeader__content);
 }
@@ -194,7 +194,14 @@ class lightbox {
       image.src = url
      } else {
       this.url = null
-      const video = video
+      const video = document.createElement('video');
+      video.setAttribute('src','Sample_Photos/Sport_Tricks_in_the_air.mp4');
+      video.width = 480;
+      video.height = 320;
+      const videoSource = document.createElement('source');
+      videoSource.setAttribute('src','Sample_Photos/Sport_Tricks_in_the_air.mp4#t=0.1');
+      videoSource.setAttribute('type','video/mp4');
+      video.appendChild(videoSource);
       const container = this.element.querySelector('.lightbox__container')
       container.innerHTML = ''
       video.onload = () => {
@@ -272,6 +279,7 @@ buildDOM (url) {
   dom.querySelector('.lightbox__prev').addEventListener('click',
   this.prev.bind(this))
   return dom
+
 }
 
   }
