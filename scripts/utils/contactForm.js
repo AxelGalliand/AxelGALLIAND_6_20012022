@@ -1,6 +1,6 @@
 
 async function fetchPhotographers() {
-  return fetch("../../../data/photographers.json")
+  return fetch("./data/photographers.json")
   .then(function(result) {
     if(result.ok) {
       return result.json();
@@ -13,12 +13,9 @@ const getPhotographerData = async (UserId) => {
   return selectedPhotographer;
 }
 function photographerNameModal(name) {
-  const modalHeaderDom = document.querySelector(".modalheader");
-  const modalHeaderName = document.createElement("h2");
-  modalHeaderDom.innerHTML="";
-  modalHeaderName.className = "modale__h2";
+  const modalHeaderName = document.querySelector(".modale__h2");
   modalHeaderName.innerHTML = `Contactez ${name}`;
-  modalHeaderDom.appendChild(modalHeaderName)
+  document.querySelector("#crossTop").focus();
 
 }
 // const photographer_Id = Number (new URLSearchParams(window.location.search).get("id"));
@@ -28,12 +25,26 @@ export function displayModal(name) {
   const modal = document.getElementById("contact_modal");
   photographerNameModal(name);
   modal.style.display = "block";
+  document.getElementById("crossTop").focus();
 }
 
 export function closeModal() {
   const modal = document.getElementById("contact_modal");
   modal.style.display = "none";
 } 
+
+// function focusBoucle () {
+//   const sendButton = document.querySelector('.contact_button');
+//   if(document.activeElement === sendButton) {
+//     console.log("test")
+//       // document.getElementById("crossTop").focus();
+//     }
+//   }
+
+
+// focusBoucle(); 
+
+
 
 const $registrationForm = document.querySelector(".contact__form");
 const regexname = /^[A-Z|a-z|-]{2,}$/;
@@ -46,7 +57,6 @@ function checkAll() {
 
   if (firstNameValid) {
     $firstNameErrorMsg.classList.add("hidden");
-    console.log('prénom : ',firstNameInput)
   } else {
     $firstNameErrorMsg.classList.remove("hidden");
   }
@@ -58,7 +68,6 @@ function checkAll() {
 
   if (lastNameValid) {
     $lastNameErrorMsg.classList.add("hidden");
-    console.log('nom : ',lastNameInput)
   } else {
     $lastNameErrorMsg.classList.remove("hidden");
   }
@@ -71,7 +80,6 @@ function checkAll() {
 
   if (emailValid) {
     $emailErrorMsg.classList.add("hidden")
-    console.log('email : ',emailInput)
   } else {
     $emailErrorMsg.classList.remove("hidden")
   }
@@ -83,13 +91,22 @@ function checkAll() {
 
   if (messageValid) {
     $messageErrorMsg.classList.add("hidden")
-    console.log('message : ',messageInput)
   } else {
     $messageErrorMsg.classList.remove("hidden")
   }
 
   if (firstNameValid && lastNameValid && emailValid && messageValid)
-  return true
+  {
+    const returnValues = {
+      prenom: document.querySelector("#first").value,
+      nom: document.querySelector("#last").value,
+      email: document.querySelector("#email").value,
+      message: document.querySelector("#message").value,
+    };
+    console.log(returnValues);
+  }
+  
+ 
  
 }
 

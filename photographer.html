@@ -10,7 +10,7 @@
   </head>
   <body>
     <header>
-      <a href="./index.html" aria-label="logo du site et lien page d'accueil" tabindex="1">
+      <a href="./index.html" aria-label="logo du site et lien page d'accueil">
        <img src="assets/images/logo.png" aria-label="logo du site" class="logo" />
       </a>  
     </header>
@@ -44,9 +44,11 @@
         <!-- ////////////////////////////////////////////////-->
     <div id="contact_modal">
 			<div class="modal">
-        <img src="assets/icons/close.svg" class="closecross" aria-label="boutton de fermeture du formulaire" />
+
 				<header class="modalheader" aria-label="contactez le photographe">
-         
+          <h2 class="modale__h2">Contactez </h2>
+          <button class="closeCross" id="crossTop" ></button>
+
         </header>
 				<form id="contact__form" class="contact__form">
 					<div
@@ -98,7 +100,7 @@
 				</form>
         <div id="validationForm">
           <p id="validationMessage">message à bien été envoyé</p> <br>
-          <button class=" contact_button closecross" id="closeForm">
+          <button class=" contact_button closeCross" id="closeForm">
             Fermer
           </button>
           </div>

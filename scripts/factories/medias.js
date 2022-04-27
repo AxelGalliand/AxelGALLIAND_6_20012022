@@ -100,8 +100,8 @@ class Video extends Media{
         photographerMedia__content.className = "photographer__portfolio--media";
     
         photographerMedia__content.innerHTML = `
-         <a href="Sample_Photos/${this.video}"> 
-          <video class="photographer__portfolio--media--video" poster="Sample_Photos/${this.video}">
+         <a href="Sample_Photos/${this.video}" alt="${this.title}"> 
+          <video class="photographer__portfolio--media--video" poster="Sample_Photos/${this.video} ">
             <source title="${this.title}" src="Sample_Photos/${this.video}#t=0.1" type="video/mp4">
           </video> 
          </a>  
@@ -109,7 +109,7 @@ class Video extends Media{
           <h3 class="photographer__portfolio--media--info--title">${this.title}</h3>
           <div class="photographer__portfolio--media--info--like">
             <span class="photographer__portfolio--media--info--like--count">${this.likes}</span>
-            <i id="like__heart" class="${this.isLiked === true ? 'fas' : 'far'} fa-heart photographer__portfolio--media--info--like--heart"></i>
+            <button id="like__heart" class="${this.isLiked === true ? 'fas' : 'far'} fa-heart photographer__portfolio--media--info--like--heart" aria-labelledby="bouton j'aime"></button>
           </div>
          </div>
         `;
@@ -132,13 +132,13 @@ class Image extends Media {
     
          photographerMedia__content.innerHTML = `
           <a href="Sample_Photos/${this.image}">
-            <img title="${this.title}" class="photographer__portfolio--media--content" src="Sample_Photos/${this.image}">
+            <img title="${this.title}" class="photographer__portfolio--media--content" src="Sample_Photos/${this.image}" alt="${this.title}">
           </a>  
           <div class="photographer__portfolio--media--info">
            <h3 class="photographer__portfolio--media--info--title">${this.title}</h3>
            <div class="photographer__portfolio--media--info--like">
             <span class="photographer__portfolio--media--info--like--count">${this.likes}</span>
-            <i id="like__heart" class="${this.isLiked === true ? 'fas' : 'far'} fa-heart photographer__portfolio--media--info--like--heart"></i>
+            <button id="like__heart" class="${this.isLiked === true ? 'fas' : 'far'} fa-heart photographer__portfolio--media--info--like--heart" aria-labelledby="bouton j'aime"></button>
            </div>
           </div>`;
         

@@ -28,9 +28,9 @@ export function photographerFactory(data) {
       article.appendChild(link);
       link.appendChild(img);
       link.appendChild(h2);
-      article.appendChild(para);
-      article.appendChild(tag);
-      article.appendChild(prices);
+      link.appendChild(para);
+      link.appendChild(tag);
+      link.appendChild(prices);
       return (article);
   }
   return { index, name, city, country, tagline, price, picture, getUserCardDOM }

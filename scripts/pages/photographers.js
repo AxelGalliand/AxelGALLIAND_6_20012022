@@ -2,7 +2,7 @@ import {displayModal, closeModal} from "../utils/contactForm.js"
 import { MediaFactory } from "../factories/medias.js"
 
 async function fetchPhotographers() {
-  return fetch("./../../../data/photographers.json")
+  return fetch("./data/photographers.json")
   .then(function(result) {
     if(result.ok) {
       return result.json();
@@ -22,12 +22,12 @@ async function photographerHeader (photographer) {
   photographerHeader__content.className = "photographer__headerContent";
   photographerHeader__content.innerHTML = `
   <article class="photographer__info"> 
-    <h1 class="photographer__h1" tabindex="2" aria-label="${photographer.name}">${photographer.name}</h1>
-    <p class="photographer__local" tabindex="3" aria-label="localisation du photographe">${photographer.city}, ${photographer.country}</p>
-    <p class="photographer__tagline" tabindex="4" aria-label="slogan du photographe">${photographer.tagline}</p>
+    <h1 class="photographer__h1" aria-label="${photographer.name}">${photographer.name}</h1>
+    <p class="photographer__local" aria-label="localisation du photographe">${photographer.city}, ${photographer.country}</p>
+    <p class="photographer__tagline" aria-label="slogan du photographe">${photographer.tagline}</p>
   </article>
-  <button class="contact_button" aria-label="formulaire de contact" tabindex="5">Contactez-moi</button>
-  <img class="photographer__portrait" src="Sample_Photos/Photographers_ID_Photos/${photographer.portrait}" tabindex="6" alt="portrait de ${photographer.name}" aria-label="portrait de ${photographer.name}"> `;
+  <button class="contact_button" aria-label="formulaire de contact">Contactez-moi</button>
+  <img class="photographer__portrait" src="Sample_Photos/Photographers_ID_Photos/${photographer.portrait}" alt="portrait de ${photographer.name}" aria-label="portrait de ${photographer.name}"> `;
 
  photographerheaderSection.appendChild(photographerHeader__content);
 }
@@ -66,7 +66,7 @@ async function photographerPortfolio (medias) {
       const likesQuantity = dataLike.querySelector(".photographer__portfolio--media--info--like--count");
       const likeHeart = dataLike.querySelector("#like__heart");
       console.log(medias[0].isLiked)
-      dataLike.addEventListener("click",  () => {
+      const likeAction = () => {
         medias[idx].isLiked = !medias[idx].isLiked;
   
         if (medias[idx].isLiked) {
@@ -85,7 +85,9 @@ async function photographerPortfolio (medias) {
       
       // likesQuantity.textContent = medias[idx].likes;
         likesQuantity.textContent = medias[idx].getLike();
-      })
+      }
+      dataLike.addEventListener("click", likeAction )
+      dataLike.addEventListener("enter", likeAction )
     })
   
 }
@@ -126,11 +128,12 @@ photographerPortfolio (selectedMedia);
 document.querySelector (".contact_button")
 .addEventListener ("click",function(){
   displayModal (selectedPhotographer.name)
-})
+}) 
 
-const closeCross = document.querySelectorAll (".closecross");
 
-closeCross.forEach((elem) => {
+const closecross = document.querySelectorAll (".closeCross");
+
+closecross.forEach((elem) => {
   elem.addEventListener ("click",function(){
     closeModal ()
   })
@@ -178,7 +181,8 @@ class lightbox {
     this.loadMedia(url)
     this.onKeyUp = this.onKeyUp.bind(this)
     document.body.appendChild(this.element)
-    document.addEventListener('keyup', this.onKeyUp)
+    document.querySelector('.lightbox__close').focus();
+    document.addEventListener('keydown', this.onKeyUp)
    }
 
    loadMedia (url) {
@@ -196,10 +200,12 @@ class lightbox {
       this.url = null;
       const video = document.createElement("video");
       video.setAttribute("controls", "");
-      video.width = 480;
-      video.height = 320;
+      video.width = 950;
+      video.height = 520;
+      video.setAttribute("tabindex", "3");
+      video.classList.add("lightbox__video")
       const videoSource = document.createElement("source");
-      videoSource.setAttribute("src", '${url}');
+      videoSource.setAttribute("src", `${url}`);
       videoSource.setAttribute("type", "video/mp4");
 
       const container = this.element.querySelector('.lightbox__container');
@@ -208,7 +214,7 @@ class lightbox {
 
       container.appendChild(video);
 
-      const containerVideo = this.element.querySelector(".lightbox__container--video");
+      const containerVideo = this.element.querySelector(".lightbox__container video");
       containerVideo.appendChild(videoSource);
 
       this.url = url;
@@ -224,6 +230,12 @@ onKeyUp (e) {
     this.prev(e)
   } else if (e.key == 'ArrowRight') {
     this.next(e)
+  } else if (e.key === "Tab") {
+    if( document.activeElement === document.querySelector('.lightbox__prev')) {
+    
+          e.preventDefault()
+          document.querySelector('.lightbox__close').focus()
+    } 
   }
 }
 
@@ -244,9 +256,10 @@ next (e) {
   }
   this.loadMedia(this.medias[i + 1])
   const imageDomList = [...document.querySelectorAll(".photographer__portfolio--media--content")];
-  const selectedImageDom = imageDomList.find((img) => img.src.includes(this.medias[i + 1]) );
+  const videoSourceDomList = [...document.querySelectorAll(".photographer__portfolio--media--video > source")]; 
+  const selectedMediaDom = [...imageDomList,...videoSourceDomList].find((img) => img.src.includes(this.medias[i + 1]) );
 
-  document.querySelector(".lightbox__title").textContent = selectedImageDom.title;
+  document.querySelector(".lightbox__title").textContent = selectedMediaDom.title;
 }
 
 prev (e) {
@@ -257,9 +270,10 @@ prev (e) {
   }
   this.loadMedia(this.medias[i - 1])
   const imageDomList = [...document.querySelectorAll(".photographer__portfolio--media--content")];
-  const selectedImageDom = imageDomList.find((img) => img.src.includes(this.medias[i - 1]) );
+  const videoSourceDomList = [...document.querySelectorAll(".photographer__portfolio--media--video > source")]; 
+  const selectedMediaDom = [...imageDomList,...videoSourceDomList].find((img) => img.src.includes(this.medias[i - 1]) );
 
-  document.querySelector(".lightbox__title").textContent = selectedImageDom.title;
+  document.querySelector(".lightbox__title").textContent = selectedMediaDom.title;
 }
 
 buildDOM (url) {
@@ -271,13 +285,14 @@ buildDOM (url) {
 
   console.log(selectedMediaDom)
   dom.classList.add('lightbox')
-  dom.innerHTML = `<button class="lightbox__close"></button>
-  <button class="lightbox__next"></button>
-  <button class="lightbox__prev"></button>
+  dom.innerHTML = `<button class="lightbox__close" tabindex="1"></button>
+  <button class="lightbox__next" tabindex="2"></button>
+  <button class="lightbox__prev" tabindex="4"></button>
   <div class="lightbox__container"></div>
   <div class="lightbox__title">${selectedMediaDom.title}</div>`
+
   dom.querySelector('.lightbox__close').addEventListener('click',
-  this.close.bind(this))
+  this.close.bind(this))  
   dom.querySelector('.lightbox__next').addEventListener('click',
   this.next.bind(this))
   dom.querySelector('.lightbox__prev').addEventListener('click',
