@@ -18,8 +18,6 @@ function photographerNameModal(name) {
   document.querySelector("#crossTop").focus();
 
 }
-// const photographer_Id = Number (new URLSearchParams(window.location.search).get("id"));
-// const selectedPhotographer = await getPhotographerData (photographer_Id);
 
 export function displayModal(name) {
   const modal = document.getElementById("contact_modal");
@@ -33,17 +31,13 @@ export function closeModal() {
   modal.style.display = "none";
 } 
 
-// function focusBoucle () {
-//   const sendButton = document.querySelector('.contact_button');
-//   if(document.activeElement === sendButton) {
-//     console.log("test")
-//       // document.getElementById("crossTop").focus();
-//     }
-//   }
 
 
-// focusBoucle(); 
-
+const focusReturnTop = document.querySelector (".contact_button");
+focusReturnTop.addEventListener ("keydown",function(){
+  console.log(document.querySelector("#crossTop"));
+document.querySelector("#crossTop").focus();
+})
 
 
 const $registrationForm = document.querySelector(".contact__form");
