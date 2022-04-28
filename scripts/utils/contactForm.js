@@ -31,7 +31,12 @@ export function closeModal() {
   modal.style.display = "none";
 } 
 
+const closeEscapeKey = document.addEventListener ("keydown", evt => {
+  if (evt.key === "Escape") {
+    closeModal();
+  }
 
+} );
 
 const focusReturnTop = document.querySelector (".contact_button");
 focusReturnTop.addEventListener ("keydown",function(){
