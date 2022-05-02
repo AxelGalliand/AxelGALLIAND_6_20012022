@@ -1,22 +1,8 @@
 
-async function fetchPhotographers() {
-  return fetch("./data/photographers.json")
-  .then(function(result) {
-    if(result.ok) {
-      return result.json();
-    }
-  })
-}
-const getPhotographerData = async (UserId) => {
-  const data = await fetchPhotographers ();
-  const selectedPhotographer = data.photographers.filter((photographer) => photographer.id === UserId ) [0]
-  return selectedPhotographer;
-}
 function photographerNameModal(name) {
   const modalHeaderName = document.querySelector(".modale__h2");
   modalHeaderName.innerHTML = `Contactez ${name}`;
   document.querySelector("#crossTop").focus();
-
 }
 
 export function displayModal(name) {
@@ -31,17 +17,20 @@ export function closeModal() {
   modal.style.display = "none";
 } 
 
-const closeEscapeKey = document.addEventListener ("keydown", evt => {
-  if (evt.key === "Escape") {
-    closeModal();
-  }
-
-} );
+  document.addEventListener ("keydown", evt => {
+    if (evt.key === "Escape") {
+      closeModal();
+    }
+  });
 
 const focusReturnTop = document.querySelector (".contact_button");
-focusReturnTop.addEventListener ("keydown",function(){
-  console.log(document.querySelector("#crossTop"));
-document.querySelector("#crossTop").focus();
+focusReturnTop.addEventListener ("keydown",function(e){
+ 
+  if (e.key === "Tab") {
+    e.preventDefault();
+    console.log(document.querySelector("#crossTop"));
+    document.querySelector("#crossTop").focus();
+  }
 })
 
 
@@ -84,7 +73,7 @@ function checkAll() {
   }
   
   const messageInput = document.getElementById("message").value;
-  const regExMesage = /^[A-Z|a-z|0-9| éèëêîïôûùâàô.;!#$%&'*+=?^_`{|}~-]{2,}$/;
+  const regExMesage = /^[A-Z|a-z|0-9| éèëêîïôûùâàô.,;!#$%&'*+=?^_`{|}~-]{2,}$/;
   const $messageErrorMsg = document.querySelector(".messageErrorMsg");
   const messageValid = regExMesage.test(messageInput)
 
@@ -103,18 +92,22 @@ function checkAll() {
       message: document.querySelector("#message").value,
     };
     console.log(returnValues);
+
+    return true
   }
+
+  return false
   
  
  
 }
 
-const formValid = () => checkAll() 
+// const formValid = () => checkAll() 
 
 $registrationForm.addEventListener("submit", function(event) {
   event.preventDefault()
 // if all booleans are true
-  if (formValid()) {
+  if (checkAll()) {
    const formValid = document.getElementById("contact__form")
     formValid.style.display = "none"
    const formValidMessage = document.getElementById("validationForm")

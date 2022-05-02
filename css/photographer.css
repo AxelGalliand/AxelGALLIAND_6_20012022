@@ -14,13 +14,7 @@
   display: block;
 }
 
-.closecrossButton {
-  margin: 0px;
-  border: none;
-  background-color: #DB8876;
-}
-
-.closeCross {
+#crossTop {
   border: none;
   background: url(./../assets/icons/close.svg) center center / 100% 100%;
   width: 24px;
@@ -29,7 +23,6 @@
   right: 28em;
   margin-top: 14px;
   cursor: pointer;
-
 }
 
 .photographer__headerContent {
@@ -96,7 +89,6 @@
   font-size: large;
   font-weight: bold;
 }
-
 
 .photographer__selectOption {
   display: flex;
@@ -242,6 +234,7 @@
 .lightbox button:hover {
   opacity: 1;
 }
+
 .lightbox.fadeOut {
   opacity: 0;
 }
@@ -296,8 +289,6 @@ transform: rotate(180deg);
 .lightbox__container video {
   max-width: 90%;
   max-height: 100vh;
-  
-
 }
 
 .lightbox__title {
@@ -306,7 +297,6 @@ transform: rotate(180deg);
   color: #901C1C;
   font-size:x-large;
 }
-
 
 .modal {
   position: absolute;
@@ -402,11 +392,10 @@ textarea {
 #validationForm {
   display: none;
 }
+
 #validationMessage {
   font-size: x-large;
-
 }
-
 
 .footer {
   font-family: "DM Sans", sans-serif;

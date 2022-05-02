@@ -93,7 +93,7 @@ async function photographerPortfolio (medias) {
 }
 
 async function photographerFooter (photographer) {
-  const photographerpherPrice = document.querySelector(".footer__priceday").innerHTML = `${photographer.price}/jours`;
+document.querySelector(".footer__priceday").innerHTML = `${photographer.price}/jours`;
 }
 
 
@@ -307,3 +307,12 @@ buildDOM (url) {
 
 
 photographerFooter(selectedPhotographer);
+
+/**
+ * @param { number } [a] - numero 1
+ * @param { number } [b] - numero 1
+ * @returns {number}
+ */
+function add(a,b) {
+  return a + b;
+}
