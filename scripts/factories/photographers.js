@@ -1,3 +1,8 @@
+/**
+ * fonction qui créée le squelette de la carte d'un photographe sur la page d'accueil
+ * @param {{index: string, name: string, city: string, country: string, tagline: string, price: number, picture: string}} data 
+ * @returns 
+ */
 export function photographerFactory(data) {
   const {id, name, city, country, tagline, price, portrait } = data;
 

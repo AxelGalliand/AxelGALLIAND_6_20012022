@@ -1,10 +1,16 @@
-
+/**
+ * fonction créant le titre de la modale de contacte du photogapher avec sont nom
+ * @param {string} name 
+ */
 function photographerNameModal(name) {
   const modalHeaderName = document.querySelector(".modale__h2");
   modalHeaderName.innerHTML = `Contactez ${name}`;
-  document.querySelector("#crossTop").focus();
 }
 
+/**
+ * fonction faisant apparetres la modale de contacte et force le focus sur la croix 
+ * @param {string} name 
+ */
 export function displayModal(name) {
   const modal = document.getElementById("contact_modal");
   photographerNameModal(name);
@@ -23,6 +29,9 @@ export function closeModal() {
     }
   });
 
+  /**
+   * const permetant de garder le focus dans la modale
+   */
 const focusReturnTop = document.querySelector (".contact_button");
 focusReturnTop.addEventListener ("keydown",function(e){
  
@@ -37,7 +46,10 @@ focusReturnTop.addEventListener ("keydown",function(e){
 const $registrationForm = document.querySelector(".contact__form");
 const regexname = /^[A-Z|a-z|-]{2,}$/;
 
-
+/**
+ * fonction verifiant si toutes les zones de texte sont valides
+ * @returns {boolean}
+ */
 function checkAll() {
   const firstNameInput = document.getElementById("first").value;
   const $firstNameErrorMsg = document.querySelector(".firstNameErrorMsg");
@@ -73,7 +85,7 @@ function checkAll() {
   }
   
   const messageInput = document.getElementById("message").value;
-  const regExMesage = /^[A-Z|a-z|0-9| éèëêîïôûùâàô.,;!#$%&'*+=?^_`{|}~-]{2,}$/;
+  const regExMesage = /^[A-Z|a-z|0-9| \r\n éèëêîïôûùâàô.,;:!-#$%&'*+=?^_`(){|}~-]{2,}$/;
   const $messageErrorMsg = document.querySelector(".messageErrorMsg");
   const messageValid = regExMesage.test(messageInput)
 
@@ -97,23 +109,15 @@ function checkAll() {
   }
 
   return false
-  
- 
- 
 }
-
-// const formValid = () => checkAll() 
 
 $registrationForm.addEventListener("submit", function(event) {
   event.preventDefault()
-// if all booleans are true
+// si tout les boolean sont true, change la modale
   if (checkAll()) {
    const formValid = document.getElementById("contact__form")
     formValid.style.display = "none"
    const formValidMessage = document.getElementById("validationForm")
     formValidMessage.style.display = "block"
-
-    // const validationMessage = document.getElementById("validationMessage")
-    // validationMessage.style.display = "block"
   } 
 })
