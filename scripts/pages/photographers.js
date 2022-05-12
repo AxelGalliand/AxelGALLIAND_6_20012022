@@ -14,11 +14,10 @@ async function fetchPhotographers() {
     }
   })
 }
-
 /**
  * const triant le photographe en fonction de son id et celui dans l'url de la page
  * @param {number} UserId 
- * @returns {number} l'ID du photographe corespondant 
+ * @returns {{name: string, city: string, country: string, tagline: string, price: number, picture: string}} l'ID du photographe corespondant 
  */
 const getPhotographerData = async (UserId) => {
   const data = await fetchPhotographers ();
@@ -48,8 +47,9 @@ async function photographerHeader (photographer) {
 
 /**
  * const triant les media en fontion di l'id du photographe 
- * @param {{id: number, photographerId : number, title: string, image: string, likes: number, date: number, price: number}} photographerMedia_Id 
- * @returns Array des medias du photographe
+ * @param {number} photographerMedia_Id 
+ * @async
+ * @returns {Promise<Array.<{id: number, photographerId : number, title: string, image: string, likes: number, date: number, price: number}>>} Array des medias du photographe
  */
 const getMediaData = async (photographerMedia_Id) => {
   const data = await fetchPhotographers ();
@@ -67,17 +67,15 @@ function totalLikes (medias) {
   for(const media of medias)
   {
   totalLikesArray.push(media.getLike());
-
   let sum = totalLikesArray.reduce((partialSum, a) => partialSum + a);
-  
   totalLikesDom.innerHTML = `${sum}`;
   }
-  
 }
 
 /**
  * fonction creant le portfolio du photograhe et l'interation des likes 
  * @param {{id: number, photographerId : number, title: string, image: string, likes: number, date: number, price: number}} medias 
+ * @returns {Promise}
  */
 async function photographerPortfolio (medias) {
   for(const media of medias)
@@ -131,20 +129,16 @@ console.log (selectedPhotographer);
  */
 let  selectedMedia = await getMediaData (photographer_Id);
 selectedMedia = selectedMedia.map((data) => MediaFactory(data));
-console.log(selectedMedia);
 
 function mediaSortDate () {
-// selectedMedia.sort((a,b) => b.date - a.date)
 selectedMedia.sort((a,b) => b.date < a.date ? -1 : 1)
 }
 
 function mediaSortpopularity () {
-  // selectedMedia.sort((a,b) => b.likes - a.likes)
   selectedMedia.sort((a,b) => b.likes < a.likes ? -1 : 1)
 }
 
 function mediaSortTitle () {
-  // selectedMedia.sort((a,b) => b.title - a.title)
   selectedMedia.sort((a,b) => b.title < a.title ? 1 : -1)
 }
 
@@ -157,9 +151,7 @@ document.querySelector (".contact_button")
   displayModal (selectedPhotographer.name)
 }) 
 
-
 const closecross = document.querySelectorAll (".closeCross");
-
 closecross.forEach((elem) => {
   elem.addEventListener ("click",function(){
     closeModal ()
@@ -259,7 +251,6 @@ class lightbox {
       this.url = url;
       video.src = url;
     }
-    
    }
    
     /**
@@ -274,7 +265,6 @@ class lightbox {
         this.next(e)
       } else if (e.key === "Tab") {
         if( document.activeElement === document.querySelector('.lightbox__prev')) {
-        
               e.preventDefault()
               document.querySelector('.lightbox__close').focus()
         } 
@@ -306,7 +296,6 @@ class lightbox {
       const imageDomList = [...document.querySelectorAll(".photographer__portfolio--media--content")];
       const videoSourceDomList = [...document.querySelectorAll(".photographer__portfolio--media--video > source")]; 
       const selectedMediaDom = [...imageDomList,...videoSourceDomList].find((img) => img.src.includes(this.medias[i + 1]) );
-
       document.querySelector(".lightbox__title").textContent = selectedMediaDom.title;
     }
 
@@ -323,7 +312,6 @@ class lightbox {
       const imageDomList = [...document.querySelectorAll(".photographer__portfolio--media--content")];
       const videoSourceDomList = [...document.querySelectorAll(".photographer__portfolio--media--video > source")]; 
       const selectedMediaDom = [...imageDomList,...videoSourceDomList].find((img) => img.src.includes(this.medias[i - 1]) );
-
       document.querySelector(".lightbox__title").textContent = selectedMediaDom.title;
     }
 
@@ -353,12 +341,9 @@ class lightbox {
       dom.querySelector('.lightbox__prev').addEventListener('click',
       this.prev.bind(this))
       return dom
-
     }
-
 }
 
-   lightbox.init();
-
+lightbox.init();
 
 photographerFooter(selectedPhotographer);

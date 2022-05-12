@@ -37,11 +37,9 @@ focusReturnTop.addEventListener ("keydown",function(e){
  
   if (e.key === "Tab") {
     e.preventDefault();
-    console.log(document.querySelector("#crossTop"));
     document.querySelector("#crossTop").focus();
   }
 })
-
 
 const $registrationForm = document.querySelector(".contact__form");
 const regexname = /^[A-Z|a-z|-]{2,}$/;

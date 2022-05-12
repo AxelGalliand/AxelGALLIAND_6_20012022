@@ -21,10 +21,12 @@ class Media {
     this.likes = this.likes + 1;
   }
 
+  /**
+   * @returns {number}
+   */
   getLike() {
     return this.likes;
   }
-
 }
 
 class Video extends Media{
@@ -34,7 +36,6 @@ class Video extends Media{
         const photographerMediaSection = document.querySelector(".photographer__portfolio");
         const photographerMedia__content = document.createElement("article");
         photographerMedia__content.className = "photographer__portfolio--media";
-    
         photographerMedia__content.innerHTML = `
          <a href="Sample_Photos/${this.video}" alt="${this.title}"> 
           <video class="photographer__portfolio--media--video" poster="Sample_Photos/${this.video} ">
@@ -49,10 +50,7 @@ class Video extends Media{
           </div>
          </div>
         `;
-        
-        
        photographerMediaSection.appendChild(photographerMedia__content);
-       
   }
 }
 
@@ -63,8 +61,6 @@ class Image extends Media {
         const photographerMediaSection = document.querySelector(".photographer__portfolio");
         const photographerMedia__content = document.createElement("article");
         photographerMedia__content.className = "photographer__portfolio--media";
-    
-    
          photographerMedia__content.innerHTML = `
           <a href="Sample_Photos/${this.image}">
             <img title="${this.title}" class="photographer__portfolio--media--content" src="Sample_Photos/${this.image}" alt="${this.title}">
@@ -75,11 +71,8 @@ class Image extends Media {
             <span class="photographer__portfolio--media--info--like--count">${this.likes}</span>
             <button id="like__heart" class="${this.isLiked === true ? 'fas' : 'far'} fa-heart photographer__portfolio--media--info--like--heart" aria-labelledby="bouton j'aime"></button>
            </div>
-          </div>`;
-        
-        
+          </div>`; 
        photographerMediaSection.appendChild(photographerMedia__content);
-       
   }
 }
 /**
