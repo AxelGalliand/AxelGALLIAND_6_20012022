@@ -37,7 +37,7 @@ class Video extends Media{
         const photographerMedia__content = document.createElement("article");
         photographerMedia__content.className = "photographer__portfolio--media";
         photographerMedia__content.innerHTML = `
-         <a href="Sample_Photos/${this.video}" alt="${this.title}"> 
+         <a href="Sample_Photos/${this.video}"> 
           <video class="photographer__portfolio--media--video" poster="Sample_Photos/${this.video} ">
             <source title="${this.title}" src="Sample_Photos/${this.video}#t=0.1" type="video/mp4">
           </video> 
@@ -46,7 +46,7 @@ class Video extends Media{
           <h3 class="photographer__portfolio--media--info--title">${this.title}</h3>
           <div class="photographer__portfolio--media--info--like">
             <span class="photographer__portfolio--media--info--like--count">${this.likes}</span>
-            <button id="like__heart" class="${this.isLiked === true ? 'fas' : 'far'} fa-heart photographer__portfolio--media--info--like--heart" aria-labelledby="bouton j'aime"></button>
+            <button class="${this.isLiked === true ? 'fas' : 'far'} like__heart fa-heart photographer__portfolio--media--info--like--heart"></button>
           </div>
          </div>
         `;
@@ -69,7 +69,7 @@ class Image extends Media {
            <h3 class="photographer__portfolio--media--info--title">${this.title}</h3>
            <div class="photographer__portfolio--media--info--like">
             <span class="photographer__portfolio--media--info--like--count">${this.likes}</span>
-            <button id="like__heart" class="${this.isLiked === true ? 'fas' : 'far'} fa-heart photographer__portfolio--media--info--like--heart" aria-labelledby="bouton j'aime"></button>
+            <button class="${this.isLiked === true ? 'fas' : 'far'} like__heart fa-heart photographer__portfolio--media--info--like--heart"></button>
            </div>
           </div>`; 
        photographerMediaSection.appendChild(photographerMedia__content);

@@ -31,13 +31,13 @@ const getPhotographerData = async (UserId) => {
  */
 async function photographerHeader (photographer) {
   const photographerheaderSection = document.querySelector(".photographer-header");
-  const photographerHeader__content = document.createElement("article");
+  const photographerHeader__content = document.createElement("div");
   photographerHeader__content.className = "photographer__headerContent";
   photographerHeader__content.innerHTML = `
   <article class="photographer__info"> 
-    <h1 class="photographer__h1" aria-label="${photographer.name}">${photographer.name}</h1>
-    <p class="photographer__local" aria-label="localisation du photographe">${photographer.city}, ${photographer.country}</p>
-    <p class="photographer__tagline" aria-label="slogan du photographe">${photographer.tagline}</p>
+    <h2 class="photographer__h2" aria-label="${photographer.name}">${photographer.name}</h2>
+    <p class="photographer__local">${photographer.city}, ${photographer.country}</p>
+    <p class="photographer__tagline">${photographer.tagline}</p>
   </article>
   <button class="contact_button" aria-label="formulaire de contact">Contactez-moi</button>
   <img class="photographer__portrait" src="Sample_Photos/Photographers_ID_Photos/${photographer.portrait}" alt="portrait de ${photographer.name}" aria-label="portrait de ${photographer.name}"> `;
@@ -89,7 +89,7 @@ async function photographerPortfolio (medias) {
    
     dataLikes.forEach((dataLike, idx) => {
       const likesQuantity = dataLike.querySelector(".photographer__portfolio--media--info--like--count");
-      const likeHeart = dataLike.querySelector("#like__heart");
+      const likeHeart = dataLike.querySelector(".like__heart");
       console.log(medias[0].isLiked)
       const likeAction = () => {
         medias[idx].isLiked = !medias[idx].isLiked;

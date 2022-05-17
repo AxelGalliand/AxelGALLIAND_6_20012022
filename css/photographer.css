@@ -41,7 +41,7 @@
   margin-left: 4em;
 }
 
-.photographer__h1 {
+.photographer__h2 {
   color: #D3573C;
   font-size: 48px;
   margin-bottom: 0.25em;
@@ -203,7 +203,7 @@
   color: #901C1C;
 }
 
-#like__heart {
+.like__heart {
   margin: 0px;
   border: none;
   background-color: white;
